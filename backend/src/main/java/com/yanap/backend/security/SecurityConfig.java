@@ -2,6 +2,7 @@ package com.yanap.backend.security;
 
 import java.util.List;
 
+import com.yanap.backend.handler.SimpleAuthenticationEntryPoint;
 import com.yanap.backend.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                 .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
+        .and()
+            .exceptionHandling()
+                .authenticationEntryPoint(new SimpleAuthenticationEntryPoint())
         .and()
             .csrf().disable().cors();
     }
