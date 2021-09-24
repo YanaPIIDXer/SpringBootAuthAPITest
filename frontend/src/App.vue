@@ -1,16 +1,21 @@
 <template>
-  <index-button />
-  <auth-index-button />
+  <div>
+    <index-button />
+    <login-logout />
+    <auth-index-button />
+  </div>
 </template>
 
 <script>
 import IndexButton from './components/IndexButton';
+import LoginLogout from './components/LoginLogout';
 import AuthIndexButton from './components/AuthIndexButton';
 
 export default {
   name: 'App',
   components: {
     IndexButton,
+    LoginLogout,
     AuthIndexButton
   }
 }
