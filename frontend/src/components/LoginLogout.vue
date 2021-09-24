@@ -29,7 +29,6 @@ export default {
             params.append("name", this.name);
             params.append("password", this.password);
             const response = await conn.post("http://localhost:3000/auth/login", params);
-            alert(response.status);
             if (response.status != 200) {
                 alert("ログインに失敗しました");
                 return;
@@ -37,7 +36,12 @@ export default {
             this.isLogin = true;
         },
         logout: async function () {
-
+            const response = await conn.get("http://localhost:3000/auth/logout");
+            if (response.status != 200) {
+                alert("ログアウトに失敗しました");
+                return;
+            }
+            this.isLogin = false;            
         }
     }
 }
