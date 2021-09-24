@@ -12,7 +12,10 @@ export async function get(api) {
             return null;
         }
         json = JSON.parse(JSON.stringify(result.data));    
-    } catch { return null; }
+    } catch (e) {
+        alert(e);
+        return null;
+    }
     return json;
 }
 
@@ -26,6 +29,9 @@ export async function post(api, params) {
             return null;
         }
         json = JSON.parse(JSON.stringify(result.data));            
-    } catch { return null; }
+    } catch (e) {
+        alert(e);
+        return null;
+    }
     return json;
 }
