@@ -8,6 +8,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -23,13 +25,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
         .and()
             .formLogin()
-                .loginProcessingUrl("/auth/login")
+                .loginProcessingUrl("/auth/login").permitAll()
                 .usernameParameter("name")
                 .passwordParameter("password")
-                .permitAll()
+                .successHandler(new SimpleUrlAuthenticationSuccessHandler())
+                .failureHandler(new SimpleUrlAuthenticationFailureHandler())
         .and()
             .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"));
+                .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+        .and()
+            .csrf().disable();
     }
     
     @Override
