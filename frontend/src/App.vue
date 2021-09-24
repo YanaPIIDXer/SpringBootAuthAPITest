@@ -1,14 +1,17 @@
 <template>
   <index-button />
+  <auth-index-button />
 </template>
 
 <script>
-import IndexButton from './components/IndexButton.vue'
+import IndexButton from './components/IndexButton';
+import AuthIndexButton from './components/AuthIndexButton';
 
 export default {
   name: 'App',
   components: {
-    IndexButton
+    IndexButton,
+    AuthIndexButton
   }
 }
 </script>
