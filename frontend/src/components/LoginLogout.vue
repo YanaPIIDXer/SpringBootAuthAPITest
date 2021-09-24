@@ -3,15 +3,17 @@
         <div v-if="!isLogin">
             <label>name:</label><input type="text" v-model="name" /><br />
             <label>password:</label><input type="password" v-model="password" /><br />
-            <button>ログイン</button>
+            <button @click="login">ログイン</button>
         </div>
         <div v-else>
-            <button>ログアウト</button>
+            <button @click="logout">ログアウト</button>
         </div>
     </div>
 </template>
 
 <script>
+import conn from '../modules/BasicConnection';
+
 export default {
     name: "LoginLogout",
     data: function () {
@@ -20,6 +22,23 @@ export default {
             name: "",
             password: ""
         };
+    },
+    methods: {
+        login: async function () {
+            let params = new URLSearchParams();
+            params.append("name", this.name);
+            params.append("password", this.password);
+            const response = await conn.post("http://localhost:3000/auth/login", params);
+            alert(response.status);
+            if (response.status != 200) {
+                alert("ログインに失敗しました");
+                return;
+            }
+            this.isLogin = true;
+        },
+        logout: async function () {
+
+        }
     }
 }
 </script>
