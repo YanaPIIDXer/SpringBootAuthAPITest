@@ -1,0 +1,2 @@
+# SpringBootAuthAPITest
+SpringBootの認証が絡むAPIの実験用リポジトリ
