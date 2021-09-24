@@ -12,6 +12,7 @@ export default {
   methods: {
     onClick: async function () {
       var result = await get("");
+      if (result == null) { return; }
       alert(result.message);
     }
   }
